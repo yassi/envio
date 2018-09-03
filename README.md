@@ -1,5 +1,10 @@
 # envio
-Environment variable parser library for python
+Environment variable parser library for python.
+
+Mostly created as a reference for how basic package creation works. Many
+similar projects exist; the goal of this one to make the most basic
+implementation possible and also establish the minimum amount of boilerplate
+to create a package for submission.
 
 ## Installation
 
@@ -8,6 +13,7 @@ run `pip install envio`
 ## Usage
 
 Basic usage
+
 ```python
 import envio
 
@@ -21,6 +27,7 @@ MYARG = envio.get_var('MYARG') # MYARG is required
 ```
 
 Environment variables can also be coerced into multiple different types
+
 ```python
 # coerce required variable MYINT into an integer
 MYINT = envio.get_var('MYINT', var_type=int)
@@ -41,13 +48,14 @@ MYDICT = envio.get_var('MYDICT', var_type='json', default='{"hello": "world"}')
 ```
 
 Variables can also be coerced into lists by using the *many=True* argument.
+
 ```python
 # e.g MYLIST <-- '1,hello, 7, 12.0'
 # the following will parse as
 # MYLIST = ['1', 'hello', '7', '12.0']
 MYLIST = envio.get_var('MYLIST', many=True)
 
-# list parsing can be combined with type coercion. This will have enforce that
+# list parsing can be combined with type coercion. This will enforce that
 # every member of the list be parsed as 'var_type'.
 MYINTS = envio.get_var('MYINTS', var_type=int, many=True)
 
@@ -74,11 +82,14 @@ MYINTS = envio.get_var('MYINTS', var_type=int, many=True, default='1,2,3')
 
 ## Development
 
+You'll want to clone the package somewhere and have either pipenv or virtualenv available on your environment.
+
 A *Pipfile* is included in this project. It comes mostly with packages used
 to run *twine* - the utility used to submit packages to pypi. It can also be
 used to install this project's distributions locally.
 
 All commands assume the working directory is the repo root.
+
 ```bash
 # install a virtual env and the pipfile requirements.
 pipenv install
