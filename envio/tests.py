@@ -38,6 +38,14 @@ class TestEnvio(TestCase):
         val = get_var('MYVAR', default='world')
         self.assertEqual(val, 'hello')
 
+    def test_default_values_must_be_strings(self):
+        self.assertRaises(EnvioParseError, get_var, 'MYVAR', default=5)
+        self.assertRaises(EnvioParseError, get_var, 'MYVAR', default=5.0)
+        self.assertRaises(EnvioParseError, get_var, 'MYVAR', default=True)
+        self.assertRaises(EnvioParseError, get_var, 'MYVAR', default=False)
+        self.assertRaises(EnvioParseError, get_var, 'MYVAR', default=[1,2])
+        self.assertRaises(EnvioParseError, get_var, 'MYVAR', default={'h':'w'})
+
     def test_will_not_accept_missing_required_var(self):
         self.assertRaises(EnvioParseError, get_var, 'MYVAR')
 

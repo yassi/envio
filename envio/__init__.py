@@ -33,6 +33,9 @@ def get_var(name, default=None, var_type=str, many=False, delimmiter=','):
 
     if var is None:
         if default is not None:
+            if type(default) != str:
+                msg = 'default value for <%s> must be a string. got=%s' %(name, default)
+                raise EnvioParseError(msg)
             var = default
             using_default = True
         else:
